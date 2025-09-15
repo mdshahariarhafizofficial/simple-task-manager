@@ -6,20 +6,15 @@ import "./index.css"; // styles in one file
 const LOCAL_STORAGE_KEY = "my_tasks_v1";
 
 export default function App() {
-  const [tasks, setTasks] = useState([]);
-  const [filter, setFilter] = useState("all"); // 'all' | 'completed' | 'pending'
-
-  // Load from localStorage on mount
-  useEffect(() => {
+  const [tasks, setTasks] = useState(() => {
     const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if (raw) {
-      try {
-        setTasks(JSON.parse(raw));
-      } catch (e) {
-        console.error("Could not parse tasks from localStorage", e);
-      }
+    try {
+      return raw ? JSON.parse(raw) : [];
+    } catch {
+      return [];
     }
-  }, []);
+  });
+  const [filter, setFilter] = useState("all"); // 'all' | 'completed' | 'pending'
 
   // Save to localStorage on tasks change
   useEffect(() => {

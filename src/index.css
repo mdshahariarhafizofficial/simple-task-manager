@@ -121,6 +121,9 @@ h1 {
 .task-item .text {
   font-size:15px;
 }
+.task-item.completed{
+  background: #7ce75265;
+}
 .task-item.completed .text {
   text-decoration: line-through;
   opacity: 0.6;
